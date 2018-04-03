@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.med_manager.MainActivity">
+<LinearLayout
+    android:id="@+id/profile_pane"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginLeft="20dp"
+    android:layout_marginTop="50dp"
+    >
+    <ImageView
+        android:id="@+id/profile_pic"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/yila"
+        />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp">
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Display name here"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Display user email here"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            />
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Logout from Google"/>
+        </LinearLayout>
+</LinearLayout>
+
+<com.google.android.gms.common.SignInButton
+    android:id="@+id/sign_in"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="60dp"
+    android:layout_marginRight="50dp"
+    android:layout_marginLeft="50dp"
+    android:text="Sigin Google"/>
+</LinearLayout>
