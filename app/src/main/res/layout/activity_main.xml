@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.med_manager.MainActivity">
+    tools:context="com.example.med_manager.med_manager.MainActivity">
 <LinearLayout
     android:id="@+id/profile_pane"
     android:layout_width="match_parent"
