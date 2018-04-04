@@ -1,4 +1,4 @@
-package com.example.med_manager.med_manager;
+package com.example.med_manager.med_manager.ui;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
