@@ -1,13 +1,17 @@
 package com.example.med_manager.med_manager.ui;
 
 
+import android.content.Context;
+import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.med_manager.R;
+import com.example.med_manager.med_manager.provider.MedContract.MedEntry;
 
 /**
  * Created by salabs on 03/04/2018.
@@ -15,19 +19,56 @@ import com.example.med_manager.R;
 
 public class MedListAdapter extends RecyclerView.Adapter<MedListAdapter.MedViewHolder> {
 
+    private Context mContext;
+    private Cursor mCursor;
+
+    /**
+     * Constructor using the context and the db cursor
+     *
+     * @param context the calling context/activity
+     */
+    public MedListAdapter(Context context, Cursor cursor) {
+        this.mContext = context;
+        this.mCursor = cursor;
+    }
+
     @Override
     public MedListAdapter.MedViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+
+        // Get the RecyclerView item layout
+        LayoutInflater inflater = LayoutInflater.from(mContext);
+        View view = inflater.inflate(R.layout.medlist_item, parent, false);
+        return new MedViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(MedListAdapter.MedViewHolder holder, int position) {
+        // Retrieve data from the cursor
+        mCursor.moveToPosition(position);
+        int idIndex = mCursor.getColumnIndex(MedEntry._ID);
+        int nameIndex = mCursor.getColumnIndex(MedEntry.COLUMN_NAME);
+        int descIndex = mCursor.getColumnIndex(MedEntry.COLUMN_DESCRIPTION);
+
+       /* int frequencyIndex = mCursor.getColumnIndex(MedEntry.COLUMN_FREQUENCY);
+        int startDateIndex = mCursor.getColumnIndex(MedEntry.COLUMN_START_DATE);
+        int endDateIndex = mCursor.getColumnIndex(MedEntry.COLUMN_END_DATE);*/
+
+        long id = mCursor.getLong(idIndex);
+        String name = mCursor.getString(nameIndex);
+        String desc = mCursor.getString(descIndex);
+
+        // bind the data from the cursor to the ui
+
+        holder.medId.setText(String.valueOf(id));
+        holder.medName.setText(name);
+        holder.medDesc.setText(desc);
+
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+       return mCursor.getCount() ;
     }
 
     /**
@@ -35,6 +76,7 @@ public class MedListAdapter extends RecyclerView.Adapter<MedListAdapter.MedViewH
      */
     class MedViewHolder extends RecyclerView.ViewHolder {
 
+        TextView medId;
         TextView medName;
         TextView medDesc;
 
@@ -42,6 +84,7 @@ public class MedListAdapter extends RecyclerView.Adapter<MedListAdapter.MedViewH
             super(itemView);
             medName = (TextView) itemView.findViewById(R.id.med_name);
             medDesc = (TextView) itemView.findViewById(R.id.med_decs);
+            medId = (TextView)itemView.findViewById(R.id.med_id);
         }
     }
 }
