@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="2">
+<TextView
+    android:id="@+id/med_id"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+   android:text="1" />
+
+    <TextView
+        android:id="@+id/med_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="panadol"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_weight="1"
+        />
+
+    <TextView
+        android:id="@+id/med_decs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="this is the medicine for headache"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_weight="2"
+        />
+
+
+
+</LinearLayout>
