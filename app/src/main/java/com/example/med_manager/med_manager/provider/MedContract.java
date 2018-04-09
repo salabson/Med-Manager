@@ -15,17 +15,16 @@ public class MedContract {
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + AUTHORITY);
 
     // Define the possible paths for accessing data in this contract
-    // This is the path for the "plants" directory
-    public static final String PATH_MEDS = "meds";
+    public static final String MEDS_PATH = "meds";
 
 
     public static final class MedEntry implements BaseColumns {
 
-        // TaskEntry content URI = base content URI + path
+        // MedEntry content URI = base content URI + path
         public static final Uri CONTENT_URI =
-                BASE_CONTENT_URI.buildUpon().appendPath(PATH_MEDS).build();
+                BASE_CONTENT_URI.buildUpon().appendPath(MEDS_PATH).build();
 
-        public static final String TABLE_NAME = "Med";
+        public static final String TABLE_NAME = "meds";
         public static final String COLUMN_NAME = "name";
         public static final String COLUMN_DESCRIPTION = "description";
         public static final String COLUMN_FREQUENCY = "frequency";

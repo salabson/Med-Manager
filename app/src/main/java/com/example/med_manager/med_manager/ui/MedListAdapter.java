@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.med_manager.R;
+import com.example.android.med_manager.R;
 import com.example.med_manager.med_manager.provider.MedContract.MedEntry;
 
 /**
@@ -68,7 +68,8 @@ public class MedListAdapter extends RecyclerView.Adapter<MedListAdapter.MedViewH
 
     @Override
     public int getItemCount() {
-       return mCursor.getCount() ;
+        if (mCursor == null) return 0;
+        return mCursor.getCount();
     }
 
     /**
@@ -85,6 +86,19 @@ public class MedListAdapter extends RecyclerView.Adapter<MedListAdapter.MedViewH
             medName = (TextView) itemView.findViewById(R.id.med_name);
             medDesc = (TextView) itemView.findViewById(R.id.med_decs);
             medId = (TextView)itemView.findViewById(R.id.med_id);
+        }
+    }
+
+
+
+    public void swapCursor(Cursor newCursor) {
+        if (mCursor != null) {
+            mCursor.close();
+        }
+        mCursor = newCursor;
+        if (mCursor != null) {
+            // Force the RecyclerView to refresh
+            this.notifyDataSetChanged();
         }
     }
 }

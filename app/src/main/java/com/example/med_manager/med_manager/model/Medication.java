@@ -12,7 +12,7 @@ public class Medication {
     private String StartDate;
     private String EndDate;
 
-    public Medication(int id, String name, String description, int frequency, String startDate, String endDate) {
+    public Medication(String name, String description, int frequency, String startDate, String endDate) {
         this.id = id;
         Name = name;
         Description = description;

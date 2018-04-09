@@ -9,26 +9,32 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.med_manager.R;
+import com.example.android.med_manager.R;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener{
+    public static final String GOOGLE_ACCOUNT_NAME ="google_name";
+    public static final String GOOGLE_ACCOUNT_EMAIL ="google_email";
+    public static final String GOOGLE_ACCOUNT_IMGURL ="google_img_url";
     LinearLayout profile_pane;
     ImageView profile_pic;
     Button logout_button;
-    Button sigin_button;
+    SignInButton sigin_button;
     TextView txtName, txtEmail;
     GoogleApiClient googleApiClient;
     private static final int REQUEST_CODE = 200;
+    Intent listActivityIntent;
 
 
 
@@ -43,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         profile_pane = (LinearLayout)findViewById(R.id.profile_pane);
         profile_pic = (ImageView)findViewById(R.id.profile_pic);
         logout_button = (Button) findViewById(R.id.logout);
-        sigin_button = (Button) findViewById(R.id.sign_in);
+        sigin_button = (com.google.android.gms.common.SignInButton) findViewById(R.id.sign_in);
         txtName = (TextView) findViewById(R.id.name);
         txtEmail= (TextView) findViewById(R.id.email);
 
@@ -53,6 +59,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // Hide the user profile section
         profile_pane.setVisibility(View.GONE);
+
+         listActivityIntent = new Intent(this, MedListActivity.class);
 
         // configure google client parameters
         GoogleSignInOptions signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -111,7 +119,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void processSignInResult(GoogleSignInResult result) {
         if (result.isSuccess()) {
             GoogleSignInAccount signInAccount = result.getSignInAccount();
-            updateUi(true);
             String name = signInAccount.getDisplayName();
             String email = signInAccount.getEmail();
             String imgURL = signInAccount.getPhotoUrl().toString();
@@ -119,8 +126,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             txtName.setText(email.toString());
             txtEmail.setText(name.toString());
 
-
-
+            listActivityIntent.putExtra(GOOGLE_ACCOUNT_NAME, name);
+            listActivityIntent.putExtra(GOOGLE_ACCOUNT_EMAIL,email );
+            listActivityIntent.putExtra(GOOGLE_ACCOUNT_IMGURL,imgURL );
+            updateUi(true);
         } else {
             updateUi(false);
         }
@@ -128,11 +137,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void updateUi(boolean isLogin) {
         if (isLogin) {
-            profile_pane.setVisibility(View.VISIBLE);
-            sigin_button.setVisibility(View.GONE);
+           // profile_pane.setVisibility(View.VISIBLE);
+           // sigin_button.setVisibility(View.GONE);
+            startActivity(listActivityIntent);
+
         } else {
-            profile_pane.setVisibility(View.GONE);
-            sigin_button.setVisibility(View.VISIBLE);
+
+           // profile_pane.setVisibility(View.GONE);
+            //sigin_button.setVisibility(View.VISIBLE);
+            Toast.makeText(this, "Cannot start the list activity", Toast.LENGTH_LONG).show();
         }
     }
 }
