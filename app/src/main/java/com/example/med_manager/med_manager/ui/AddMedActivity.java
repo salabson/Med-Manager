@@ -33,7 +33,9 @@ import static com.example.med_manager.med_manager.ui.MedListActivity.MED_EDIT_CO
 
 
 public class AddMedActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener{
+   // holder of startdate EditText or enddate EditText
     Object dateTag;
+    
     private static String DATE_FORMAT ="dd-MM-yyyy";
     private Calendar mCalender;
     int ACTION_CODE;
@@ -173,6 +175,7 @@ public class AddMedActivity extends AppCompatActivity implements View.OnClickLis
     private void setDate(final Calendar calendar) {
         final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
         String dateForEditText = dateFormat.format(calendar.getTime());
+        // display date on appropriate EditText from the date picker
         if (dateTag == etStartDate.getTag()) {
             etStartDate.setText(dateForEditText);
         } else if (dateTag == etEndtDateP.getTag()) {
