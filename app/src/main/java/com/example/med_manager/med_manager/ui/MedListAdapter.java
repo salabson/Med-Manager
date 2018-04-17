@@ -21,15 +21,23 @@ public class MedListAdapter extends RecyclerView.Adapter<MedListAdapter.MedViewH
 
     private Context mContext;
     private Cursor mCursor;
+    private ListItemClickListener itemClickListener;
+
+
 
     /**
      * Constructor using the context and the db cursor
      *
-     * @param context the calling context/activity
+     * @param listener the calling context/activity
      */
-    public MedListAdapter(Context context, Cursor cursor) {
-        this.mContext = context;
+    public MedListAdapter(Context context, ListItemClickListener listener, Cursor cursor) {
+        this.itemClickListener = listener;
         this.mCursor = cursor;
+        this.mContext = context;
+    }
+
+    public interface ListItemClickListener {
+        void onListItemClick(int id);
     }
 
     @Override
@@ -75,7 +83,7 @@ public class MedListAdapter extends RecyclerView.Adapter<MedListAdapter.MedViewH
     /**
      * PlantViewHolder class for the recycler view item
      */
-    class MedViewHolder extends RecyclerView.ViewHolder {
+    class MedViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView medId;
         TextView medName;
@@ -86,6 +94,14 @@ public class MedListAdapter extends RecyclerView.Adapter<MedListAdapter.MedViewH
             medName = (TextView) itemView.findViewById(R.id.med_name);
             medDesc = (TextView) itemView.findViewById(R.id.med_decs);
             medId = (TextView)itemView.findViewById(R.id.med_id);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            int  itemClickedPositon = getAdapterPosition();
+            //itemClickListener.onListItemClick(mCursor.getInt(mCursor.getColumnIndex(MedEntry._ID)));
+            itemClickListener.onListItemClick(Integer.valueOf(medId.getText().toString()));
         }
     }
 
@@ -101,4 +117,6 @@ public class MedListAdapter extends RecyclerView.Adapter<MedListAdapter.MedViewH
             this.notifyDataSetChanged();
         }
     }
+
+
 }

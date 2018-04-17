@@ -65,22 +65,29 @@
             android:layout_marginTop="10dp"/>
     </LinearLayout>
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="3">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Start Date"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"/>
-        <DatePicker
+            android:layout_marginTop="10dp"
+            android:layout_weight="0.5"/>
+        <EditText
             android:id="@+id/dpStartDate"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="2.5"
+            android:drawableRight="@drawable/ic_calendar"
+            android:onClick="showDatePickerDialog"
+            android:tag="sDate"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -94,12 +101,16 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             />
-        <DatePicker
+        <EditText
             android:id="@+id/dpEndDate"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="18dp"
-            android:layout_marginTop="10dp"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:drawableRight="@drawable/ic_calendar"
+            android:onClick="showDatePickerDialog"
+            android:tag="eDate"/>
     </LinearLayout>
 
     <Button

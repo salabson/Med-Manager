@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.android.med_manager.R;
 import com.example.med_manager.med_manager.provider.MedContract;
@@ -25,11 +26,12 @@ import static com.example.med_manager.med_manager.provider.MedContract.MEDS_PATH
  * Created by salabs on 04/04/2018.
  */
 
-public class MedListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class MedListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>, MedListAdapter.ListItemClickListener {
     public static  final int  MED_CREATE_CODE = 0;
     public static  final int MED_EDIT_CODE = 1;
     public static  String  CREATE_MED;
     public static  String EDIT_MED;
+    public static String EXTRA_MED_ID;
 
     static final int LOADER_ID = 500;
     RecyclerView mMedRecyclerView;
@@ -51,7 +53,7 @@ public class MedListActivity extends AppCompatActivity implements LoaderManager.
         mMedRecyclerView = (RecyclerView) findViewById(R.id.med_recycler_view);
         mMedRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        mAdapter = new MedListAdapter(this, null);
+        mAdapter = new MedListAdapter(this, this, null);
         mMedRecyclerView.setAdapter(mAdapter);
 
         final Intent intent = new Intent(this, AddMedActivity.class);
@@ -94,5 +96,14 @@ public class MedListActivity extends AppCompatActivity implements LoaderManager.
         Cursor cursor = this.getContentResolver().query(MED_URI,null,null,null,null,null);
         cursor.moveToFirst();
         mAdapter.swapCursor(cursor);
+    }
+
+    @Override
+    public void onListItemClick(int id) {
+        Intent intent = new Intent(this, AddMedActivity.class);
+        intent.putExtra(EDIT_MED,MED_EDIT_CODE);
+        intent.putExtra("ID", id);
+        startActivity(intent);
+        //Toast.makeText(this,String.valueOf(id),Toast.LENGTH_LONG).show();
     }
 }
