@@ -1,5 +1,6 @@
 package com.example.med_manager.med_manager.ui;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static final String GOOGLE_ACCOUNT_NAME ="google_name";
     public static final String GOOGLE_ACCOUNT_EMAIL ="google_email";
     public static final String GOOGLE_ACCOUNT_IMGURL ="google_img_url";
+    ProgressDialog pDialog;
 
     SignInButton sigin_button;
        GoogleApiClient googleApiClient;
@@ -43,11 +46,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // get reference to UI components
-
         sigin_button = (com.google.android.gms.common.SignInButton) findViewById(R.id.sign_in);
-
         // Register on click lister to both logut and sign button
         sigin_button.setOnClickListener(this);
+
+        pDialog = new ProgressDialog(this);
 
         // Hide the user profile section
 
@@ -89,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void signIn() {
+        displayProgressDialog();
         Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
         startActivityForResult(intent,REQUEST_CODE);
     }
@@ -102,9 +106,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == REQUEST_CODE) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            hideProgressDialog();
             processSignInResult(result);
         }
     }
@@ -140,6 +144,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    // this fuction display progress dialog while signing in progress
+    private void displayProgressDialog() {
+        pDialog.setMessage("Logging In.. Please wait...");
+        pDialog.setIndeterminate(false);
+        pDialog.setCancelable(false);
+        pDialog.show();
+    }
+
+    private void hideProgressDialog() {
+
+        pDialog.hide();
+
+    }
 
 
 }
