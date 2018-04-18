@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.android.med_manager">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name="com.example.med_manager.med_manager.ui.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:name="com.example.med_manager.med_manager.provider.MedContentProvider"
+            android:authorities="com.example.android.med_manager"
+            android:exported="true" />
+        <activity android:name="com.example.med_manager.med_manager.ui.MedListActivity" android:label="@string/list_activity_label">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.med_manager.med_manager.ui.MainActivity" />
+        </activity>
+        <activity android:name="com.example.med_manager.med_manager.ui.AddMedActivity" android:label="@string/Add_activity_label" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.med_manager.med_manager.ui.MedListActivity" />
+        </activity>
+        <activity android:name="com.example.med_manager.med_manager.ui.SearchActivity"
+            android:launchMode="singleTop" android:label="@string/search_activity_label">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.med_manager.med_manager.ui.MedListActivity" />
+        </activity>
+
+        <!--This is required for immediate syncs -->
+        <service
+            android:name="com.example.med_manager.med_manager.ui.MedReminderIntentService"
+            android:exported="false"/>
+
+        <!-- COMPLETED (14) Add the WaterReminderFirebaseJobService here. It should not be exported and it
+        should have an intent filter for the action com.firebase.jobdispatcher.ACTION_EXECUTE -->
+        <!-- This is the Service declaration used in conjunction with FirebaseJobDispatcher -->
+        <service
+            android:name="com.example.med_manager.med_manager.ui.MedReminderFirebaseJobservice"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE"/>
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>

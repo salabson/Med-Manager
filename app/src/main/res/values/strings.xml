@@ -5,4 +5,7 @@
     <string name="med_reminder_notification_body">Your Health is important it is time to take your medication!</string>
     <string name="healh_msg">Health is wealth</string>
     <string name="internet_problem">Oops!! you are not connected to internet</string>
+    <string name="search_activity_label">Search Medication</string>
+    <string name="list_activity_label">List Medication</string>
+    <string name="Add_activity_label">Add Medication</string>
 </resources>
