@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name"
+            android:text="@string/name_text"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"/>
         <EditText
@@ -34,7 +34,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Description"
+            android:text="@string/Med_description_text"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             />
@@ -53,7 +53,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Frequency"
+            android:text="@string/Med_freq_text"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"/>
         <EditText
@@ -72,7 +72,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Start Date"
+            android:text="@string/star_date_text"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
@@ -96,7 +96,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="End Date"
+            android:text="@string/end_date_text"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
@@ -117,7 +117,7 @@
         android:id="@+id/save_med"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:text="Save"
+        android:text="@string/save_button_text"
         android:layout_marginTop="20dp"
         android:layout_gravity="center_horizontal"
         />
