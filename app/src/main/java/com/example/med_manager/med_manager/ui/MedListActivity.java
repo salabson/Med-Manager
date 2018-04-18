@@ -1,5 +1,6 @@
 package com.example.med_manager.med_manager.ui;
 
+import android.content.ContentUris;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -42,6 +43,7 @@ public class MedListActivity extends AppCompatActivity implements LoaderManager.
     MedDbHelper mDbHelper;
     SQLiteDatabase mDb;
     FloatingActionButton fab;
+    Uri MED_URI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,10 +81,14 @@ public class MedListActivity extends AppCompatActivity implements LoaderManager.
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                // delete from database
                 int id = viewHolder.getAdapterPosition() + 1;
-                Uri MED_URI = BASE_CONTENT_URI.buildUpon().appendPath(MEDS_PATH).build();
+               Uri SINGLE_MED_URI = ContentUris.withAppendedId(
+                        BASE_CONTENT_URI.buildUpon().appendPath(MEDS_PATH).build(), id);
                 String queryString = MedContract.MedEntry.COLUMN_NAME + " = " +  id ;
-                getContentResolver().delete(MED_URI,queryString,null);
+
+                MED_URI = BASE_CONTENT_URI.buildUpon().appendPath(MEDS_PATH).build();
+                getContentResolver().delete(SINGLE_MED_URI,queryString,null);
                 Cursor cursor = getContentResolver().query(MED_URI,null,null,null,null);
                 cursor.moveToFirst();
                 mAdapter.swapCursor(cursor);
@@ -112,7 +118,7 @@ public class MedListActivity extends AppCompatActivity implements LoaderManager.
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        Uri MED_URI = BASE_CONTENT_URI.buildUpon().appendPath(MEDS_PATH).build();
+         MED_URI = BASE_CONTENT_URI.buildUpon().appendPath(MEDS_PATH).build();
         return new CursorLoader(this,MED_URI , null,
                 null, null, null);
     }
