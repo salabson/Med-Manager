@@ -3,7 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/divider"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp">
 <android.support.v7.widget.RecyclerView
     android:id="@+id/med_recycler_view"
     android:layout_width="match_parent"

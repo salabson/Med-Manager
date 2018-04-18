@@ -11,8 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.example.android.med_manager.R;
+import com.example.med_manager.med_manager.utils.InternetUtils;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -27,12 +27,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static final String GOOGLE_ACCOUNT_NAME ="google_name";
     public static final String GOOGLE_ACCOUNT_EMAIL ="google_email";
     public static final String GOOGLE_ACCOUNT_IMGURL ="google_img_url";
-    LinearLayout profile_pane;
-    ImageView profile_pic;
-    Button logout_button;
+
     SignInButton sigin_button;
-    TextView txtName, txtEmail;
-    GoogleApiClient googleApiClient;
+       GoogleApiClient googleApiClient;
     private static final int REQUEST_CODE = 200;
     Intent listActivityIntent;
 
@@ -46,19 +43,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // get reference to UI components
-        profile_pane = (LinearLayout)findViewById(R.id.profile_pane);
-        profile_pic = (ImageView)findViewById(R.id.profile_pic);
-        logout_button = (Button) findViewById(R.id.logout);
+
         sigin_button = (com.google.android.gms.common.SignInButton) findViewById(R.id.sign_in);
-        txtName = (TextView) findViewById(R.id.name);
-        txtEmail= (TextView) findViewById(R.id.email);
 
         // Register on click lister to both logut and sign button
-        logout_button.setOnClickListener(this);
         sigin_button.setOnClickListener(this);
 
         // Hide the user profile section
-        profile_pane.setVisibility(View.GONE);
 
          listActivityIntent = new Intent(this, MedListActivity.class);
 
@@ -76,11 +67,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.sign_in:
-                signIn();
+                if (InternetUtils.isInternetConnected(this)) {
+                    signIn();
+                } else {
+                    Toast.makeText(this, getString(R.string.internet_problem),Toast.LENGTH_LONG).show();
+                }
+
                 break;
-            case R.id.logout:
-                signOut();
-                break;
+
         }
 
     }
@@ -89,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
             @Override
             public void onResult(@NonNull Status status) {
-                updateUi(false);
+                login(false);
             }
         });
     }
@@ -122,20 +116,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String name = signInAccount.getDisplayName();
             String email = signInAccount.getEmail();
             String imgURL = signInAccount.getPhotoUrl().toString();
-            Glide.with(this).load(imgURL).into(profile_pic);
-            txtName.setText(email.toString());
-            txtEmail.setText(name.toString());
 
             listActivityIntent.putExtra(GOOGLE_ACCOUNT_NAME, name);
             listActivityIntent.putExtra(GOOGLE_ACCOUNT_EMAIL,email );
             listActivityIntent.putExtra(GOOGLE_ACCOUNT_IMGURL,imgURL );
-            updateUi(true);
+            login(true);
         } else {
-            updateUi(false);
+            login(false);
         }
     }
 
-    private void updateUi(boolean isLogin) {
+    private void login(boolean isLogin) {
         if (isLogin) {
            // profile_pane.setVisibility(View.VISIBLE);
            // sigin_button.setVisibility(View.GONE);
@@ -148,4 +139,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this, "Cannot start the list activity", Toast.LENGTH_LONG).show();
         }
     }
+
+
+
 }

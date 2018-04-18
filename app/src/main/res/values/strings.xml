@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Med-Manager</string>
+
+    <string name="med_reminder_notification_title">Time for medication </string>
+    <string name="med_reminder_notification_body">Your Health is important it is time to take your medication!</string>
+    <string name="healh_msg">Health is wealth</string>
+    <string name="internet_problem">Oops!! you are not connected to internet</string>
+</resources>

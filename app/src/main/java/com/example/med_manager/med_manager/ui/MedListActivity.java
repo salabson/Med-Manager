@@ -12,6 +12,8 @@ import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -68,6 +70,13 @@ public class MedListActivity extends AppCompatActivity implements LoaderManager.
             }
         });
 
+        // start service
+        Intent reminderIntent = new Intent(this, MedReminderIntentService.class);
+        reminderIntent.setAction(ReminderTasks.ACTION_MEDICATION_REMINDER);
+        startService(reminderIntent);
+
+        ReminderScheduler.scheduleMedicationReminder(this);
+
         getSupportLoaderManager().initLoader(LOADER_ID, null, this);
     }
 
@@ -100,10 +109,29 @@ public class MedListActivity extends AppCompatActivity implements LoaderManager.
 
     @Override
     public void onListItemClick(int id) {
+        // start add medicine activity and pass the id of the clicked item on the listview
         Intent intent = new Intent(this, AddMedActivity.class);
         intent.putExtra(EDIT_MED,MED_EDIT_CODE);
         intent.putExtra("ID", id);
         startActivity(intent);
         //Toast.makeText(this,String.valueOf(id),Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_search) {
+            Intent searchIntent = new Intent(this,SearchActivity.class);
+            startActivity(searchIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

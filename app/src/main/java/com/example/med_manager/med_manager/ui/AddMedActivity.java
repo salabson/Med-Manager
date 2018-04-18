@@ -35,12 +35,11 @@ import static com.example.med_manager.med_manager.ui.MedListActivity.MED_EDIT_CO
 public class AddMedActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener{
    // holder of startdate EditText or enddate EditText
     Object dateTag;
-    
-    private static String DATE_FORMAT ="dd-MM-yyyy";
+
+    private static String DATE_FORMAT ="dd/MM/yyyy";
     private Calendar mCalender;
     int ACTION_CODE;
     Uri SINGLE_MED_URI;
-    private static final int SINGLE_LOADER_ID = 200;
     long mMedId;
 
     Button saveMedButton;
