@@ -56,6 +56,8 @@ public class MedListAdapter extends RecyclerView.Adapter<MedListAdapter.MedViewH
         int idIndex = mCursor.getColumnIndex(MedEntry._ID);
         int nameIndex = mCursor.getColumnIndex(MedEntry.COLUMN_NAME);
         int descIndex = mCursor.getColumnIndex(MedEntry.COLUMN_DESCRIPTION);
+        int startDateIndex = mCursor.getColumnIndex(MedEntry.COLUMN_START_DATE);
+        int endDateIndex = mCursor.getColumnIndex(MedEntry.COLUMN_END_DATE);
 
        /* int frequencyIndex = mCursor.getColumnIndex(MedEntry.COLUMN_FREQUENCY);
         int startDateIndex = mCursor.getColumnIndex(MedEntry.COLUMN_START_DATE);
@@ -64,6 +66,8 @@ public class MedListAdapter extends RecyclerView.Adapter<MedListAdapter.MedViewH
         long id = mCursor.getLong(idIndex);
         String name = mCursor.getString(nameIndex);
         String desc = mCursor.getString(descIndex);
+        String startdate = mCursor.getString(startDateIndex);
+        String endDate = mCursor.getString(endDateIndex);
 
         // bind the data from the cursor to the ui
 
@@ -88,12 +92,16 @@ public class MedListAdapter extends RecyclerView.Adapter<MedListAdapter.MedViewH
         TextView medId;
         TextView medName;
         TextView medDesc;
+        TextView startDate;
+        TextView endDate;
 
         public MedViewHolder(View itemView) {
             super(itemView);
             medName = (TextView) itemView.findViewById(R.id.med_name);
             medDesc = (TextView) itemView.findViewById(R.id.med_decs);
             medId = (TextView)itemView.findViewById(R.id.med_id);
+            startDate = (TextView)itemView.findViewById(R.id.tvStartDate) ;
+            endDate = (TextView)itemView.findViewById(R.id.tvEndDate);
             itemView.setOnClickListener(this);
         }
 

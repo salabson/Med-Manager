@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sigin_button.setOnClickListener(this);
 
         pDialog = new ProgressDialog(this);
+        pDialog.hide();
 
         // Hide the user profile section
 

@@ -3,45 +3,80 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="horizontal"
     android:layout_marginTop="1dp"
     android:layout_marginBottom="1dp"
+    android:weightSum="3"
     android:background="@drawable/selector_list_item">
 
-<TextView
-    android:id="@+id/med_id"
-    android:layout_width="0dp"
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:textSize="16sp"
-    android:textStyle="bold"
-    android:layout_weight="1"
-   android:text="1" />
-
+    android:layout_weight="2.5">
+    <TextView
+        android:id="@+id/med_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:visibility="gone"
+        android:text="1" />
     <TextView
         android:id="@+id/med_name"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="panadol"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:layout_weight="1"
-        android:layout_gravity="center"
-        android:textSize="16sp"
+        android:textColor="@color/primary_text"
+        android:textSize="20sp"
         android:textStyle="bold"
         />
 
     <TextView
         android:id="@+id/med_decs"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="this is the medicine for headache"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:layout_weight="2"
-        android:layout_gravity="center"
+        android:textColor="@color/secondary_text"
         android:textSize="16sp"
-        android:textStyle="bold"
         />
+
+</LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5">
+        <TextView
+            android:id="@+id/tvStartDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="23/04/2018"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="@color/secondary_text"
+            android:textSize="12sp"
+            />
+
+        <TextView
+            android:id="@+id/tvEndDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="26/05/2018"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="@color/secondary_text"
+            android:textSize="12sp"
+            />
+    </LinearLayout>
+
+
+
 
 
 

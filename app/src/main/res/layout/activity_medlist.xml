@@ -7,6 +7,14 @@
     android:background="@color/divider"
     android:paddingTop="4dp"
     android:paddingBottom="4dp">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/accent_blue">
+    </LinearLayout>
+
 <android.support.v7.widget.RecyclerView
     android:id="@+id/med_recycler_view"
     android:layout_width="match_parent"
