@@ -56,12 +56,77 @@ public class InsertData {
         cv.put(MedEntry.COLUMN_END_DATE,"20/05/2018");
         list.add(cv);
 
+        cv = new ContentValues();
+        cv.put(MedEntry.COLUMN_NAME,"methylphenidate");
+        cv.put(MedEntry.COLUMN_DESCRIPTION,"treats attention deficit disorder and excessive sleepiness");
+        cv.put(MedEntry.COLUMN_FREQUENCY,4);
+        cv.put(MedEntry.COLUMN_START_DATE,"1/06/2018");
+        cv.put(MedEntry.COLUMN_END_DATE,"25/07/2018");
+        list.add(cv);
+        cv = new ContentValues();
+        cv.put(MedEntry.COLUMN_NAME,"pindolol");
+        cv.put(MedEntry.COLUMN_DESCRIPTION,"treats high blood pressure, take one tablet");
+        cv.put(MedEntry.COLUMN_FREQUENCY,4);
+        cv.put(MedEntry.COLUMN_START_DATE,"1/06/2018");
+        cv.put(MedEntry.COLUMN_END_DATE,"25/07/2018");
+        list.add(cv);
+
+        cv = new ContentValues();
+        cv.put(MedEntry.COLUMN_NAME,"pindolol");
+        cv.put(MedEntry.COLUMN_DESCRIPTION,"suppresses immune system and give energy");
+        cv.put(MedEntry.COLUMN_FREQUENCY,15);
+        cv.put(MedEntry.COLUMN_START_DATE,"1/06/2018");
+        cv.put(MedEntry.COLUMN_END_DATE,"25/07/2018");
+        list.add(cv);
+
+        cv = new ContentValues();
+        cv.put(MedEntry.COLUMN_NAME,"Levothyroxine");
+        cv.put(MedEntry.COLUMN_DESCRIPTION,"Levothyroxine treats hypothyroidism (low thyroid hormone). It is also used to treat or prevent goiter (enlarged thyroid gland), which can be caused by hormone imbalances, radiation treatment, surgery, or cancer");
+        cv.put(MedEntry.COLUMN_FREQUENCY,10);
+        cv.put(MedEntry.COLUMN_START_DATE,"1/06/2018");
+        cv.put(MedEntry.COLUMN_END_DATE,"25/07/2018");
+        list.add(cv);
+
+        cv = new ContentValues();
+        cv.put(MedEntry.COLUMN_NAME,"Lisinopri");
+        cv.put(MedEntry.COLUMN_DESCRIPTION,"Lisinopril is used to treat high blood pressure (hypertension) or congestive heart failure. It is also used to improve survival after a heart attack");
+        cv.put(MedEntry.COLUMN_FREQUENCY,4);
+        cv.put(MedEntry.COLUMN_START_DATE,"1/06/2018");
+        cv.put(MedEntry.COLUMN_END_DATE,"25/07/2018");
+        list.add(cv);
+
+        cv = new ContentValues();
+        cv.put(MedEntry.COLUMN_NAME,"Simvastatin");
+        cv.put(MedEntry.COLUMN_DESCRIPTION,"Simvastatin is used to lower cholesterol and triglycerides (types of fat) in the blood");
+        cv.put(MedEntry.COLUMN_FREQUENCY,4);
+        cv.put(MedEntry.COLUMN_START_DATE,"1/06/2018");
+        cv.put(MedEntry.COLUMN_END_DATE,"25/07/2018");
+        list.add(cv);
+
+        cv = new ContentValues();
+        cv.put(MedEntry.COLUMN_NAME,"Hydrocodone");
+        cv.put(MedEntry.COLUMN_DESCRIPTION,"Hydrocodone and acetaminophen combination is used to relieve moderate to moderately severe pain");
+        cv.put(MedEntry.COLUMN_FREQUENCY,4);
+        cv.put(MedEntry.COLUMN_START_DATE,"1/06/2018");
+        cv.put(MedEntry.COLUMN_END_DATE,"25/07/2018");
+        list.add(cv);
+
+
+        cv = new ContentValues();
+        cv.put(MedEntry.COLUMN_NAME,"Losartan");
+        cv.put(MedEntry.COLUMN_DESCRIPTION,"Losartan is used to treat high blood pressure (hypertension). It is also used to lower the risk of stroke in certain people with heart disease");
+        cv.put(MedEntry.COLUMN_FREQUENCY,4);
+        cv.put(MedEntry.COLUMN_START_DATE,"1/06/2018");
+        cv.put(MedEntry.COLUMN_END_DATE,"25/07/2018");
+        list.add(cv);
+
+
 
         try {
 
             db.beginTransaction();
             // clear db
-            db.delete(MedEntry.TABLE_NAME,null,null);
+           // db.delete(MedEntry.TABLE_NAME,null,null);
             // loop to insert data in the list
             for (ContentValues c : list) {
                 db.insert(MedEntry.TABLE_NAME,null,c);

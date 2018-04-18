@@ -4,6 +4,7 @@ package com.example.med_manager.med_manager.ui;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,7 @@ import com.example.med_manager.med_manager.provider.MedContract.MedEntry;
  * Created by salabs on 03/04/2018.
  */
 
-public class MedListAdapter extends RecyclerView.Adapter<MedListAdapter.MedViewHolder> {
+public class MedListAdapter extends RecyclerView.Adapter<MedListAdapter.MedViewHolder>  {
 
     private Context mContext;
     private Cursor mCursor;
@@ -84,12 +85,16 @@ public class MedListAdapter extends RecyclerView.Adapter<MedListAdapter.MedViewH
         return mCursor.getCount();
     }
 
+
+
+
+
     /**
      * PlantViewHolder class for the recycler view item
      */
     class MedViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView medId;
+       public TextView medId;
         TextView medName;
         TextView medDesc;
         TextView startDate;

@@ -12,6 +12,7 @@ import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -70,14 +71,43 @@ public class MedListActivity extends AppCompatActivity implements LoaderManager.
             }
         });
 
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT|ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                int id = viewHolder.getAdapterPosition() + 1;
+                Uri MED_URI = BASE_CONTENT_URI.buildUpon().appendPath(MEDS_PATH).build();
+                String queryString = MedContract.MedEntry.COLUMN_NAME + " = " +  id ;
+                getContentResolver().delete(MED_URI,queryString,null);
+                Cursor cursor = getContentResolver().query(MED_URI,null,null,null,null);
+                cursor.moveToFirst();
+                mAdapter.swapCursor(cursor);
+
+            }
+        };
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(mMedRecyclerView);
+
         // start service
         Intent reminderIntent = new Intent(this, MedReminderIntentService.class);
         reminderIntent.setAction(ReminderTasks.ACTION_MEDICATION_REMINDER);
         startService(reminderIntent);
 
+        // issue reminder
         ReminderScheduler.scheduleMedicationReminder(this);
 
         getSupportLoaderManager().initLoader(LOADER_ID, null, this);
+    }
+
+    private void requery(Uri MED_URI, String queryString) {
+        getContentResolver().delete(MED_URI,queryString,null);
+        Cursor cursor = getContentResolver().query(MED_URI,null,null,null,null);
+        cursor.moveToFirst();
+        mAdapter.swapCursor(cursor);
     }
 
     @Override
@@ -134,4 +164,9 @@ public class MedListActivity extends AppCompatActivity implements LoaderManager.
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+
+
+
 }
