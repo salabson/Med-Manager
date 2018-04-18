@@ -52,7 +52,7 @@ public class MedListActivity extends AppCompatActivity implements LoaderManager.
 
         mDbHelper = new MedDbHelper(this);
         mDb = mDbHelper.getWritableDatabase();
-        InsertData.insertMedData(mDb);
+        //InsertData.insertMedData(mDb);
 
         // The list activity displays the meds in a  recycler view
         mMedRecyclerView = (RecyclerView) findViewById(R.id.med_recycler_view);
